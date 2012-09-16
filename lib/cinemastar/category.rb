@@ -2,6 +2,7 @@ module Cinemastar
   class Category
 
     def self.list(path)
+      @@complete = YAML.load_file("config/complete.yaml")
       Dir.glob("#{path}/**/*").sort.each do |file|
         category = self.new(file, path)
         if category.directory?
@@ -13,7 +14,6 @@ module Cinemastar
     def initialize(file, path)
       @file = file
       @path = path
-      @@complate = YAML.load_file("config/complate.yaml")
     end
 
     def path
@@ -21,11 +21,15 @@ module Cinemastar
     end
 
     def name
-      @file.sub(/^.+?([^\/]+)$/,'\\1').gsub('_', ' ')
+      real_name.gsub('_', ' ')
     end
 
-    def complate?
-      @@complate.include?(@file.sub(/^.+\/([^\/]+)\/[^\/]+$/,'\\1'))
+    def real_name
+      @file.sub(/^.+?([^\/]+)$/,'\\1')
+    end
+
+    def complete?
+      @@complete.include?(real_name)
     end
 
     def directory?
@@ -36,7 +40,7 @@ module Cinemastar
       { 
         path: path,
         name: name,
-        complate: complate?.to_s
+        complete: complete?.to_s
       }
     end
 

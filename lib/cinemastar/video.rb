@@ -4,7 +4,7 @@ module Cinemastar
     def self.list(directory, path)
       Dir.glob("#{directory}/#{path}/*").sort.each do |file|
         video = self.new(file, directory)
-        if video.file?
+        if video.file? && !video.ignore?
           yield video.to_map
         end
       end
@@ -45,6 +45,10 @@ module Cinemastar
 
     def file?
       File.file?(@file)
+    end
+    
+    def ignore?
+      return true if /(html|jpg)$/ =~ @file
     end
 
     def to_map

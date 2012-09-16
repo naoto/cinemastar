@@ -2,12 +2,13 @@ module Cinemastar
   class Latest
 
     def self.list(path)
-      files = Dir.glob("#{path}/**/*.*").sort_by do |file|
+      files = []
+      Dir.glob("#{path}/**/*.*").sort_by { |file|
         File::stat(file).mtime
-      end
-      files = files.reverse[0..30].map do |file|
+      }.reverse.each do |file|
         video = Video.new(file, path)
-        video.to_map
+        files << video.to_map if !video.ignore?
+        break if files.size == 30
       end
       {files: files}
     end
