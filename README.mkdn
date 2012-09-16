@@ -17,7 +17,7 @@ Setting
 
 ```yaml
 ---
- - movie_directory: /path/to/movie/directory
+:movie_directory: /path/to/movie/directory
 ```
 
 Start
