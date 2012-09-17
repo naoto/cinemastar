@@ -21,6 +21,8 @@ module Cinemastar
     def initialize(file, path)
       @file = file
       @path = path
+      @@infomation ||= Config.load('config/infomation.yaml')
+      @@infomation.movie ||= {}
     end
 
     def path
@@ -36,7 +38,13 @@ module Cinemastar
     end
 
     def length
-      # TODO
+      category_and_name = "#{category}/#{realname}"
+      if @@infomation.movie[category_and_name].nil?
+        @@infomation.movie[category_and_name] = FFmpeg.length(@file)
+        Config.save('config/infomation.yaml', @@infomation)
+      end
+
+      @@infomation.movie[category_and_name]
     end
 
     def count

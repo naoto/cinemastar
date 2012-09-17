@@ -2,7 +2,7 @@ module Cinemastar
   class System
 
     def initialize(settings)
-      @config = Config.load
+      @config = Config.load('config/setting.yaml')
       @settings = settings
 
       make_symbolic_link

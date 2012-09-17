@@ -8,6 +8,13 @@ module Cinemastar
       ffmpeg.image_relative_path
     end
 
+    def self.length(path)
+      info = `ffmpeg -i "#{path}" 2>&1`
+      if info =~ /Duration: (\d{2}):(\d{2}):(\d{2})\.\d{2}/
+        return "#{$1}:#{$2}:#{$3}"
+      end
+    end
+
     def initialize(path, category, name)
       @movie_path = "#{path}/video"
       @thumbnail_path = "#{path}/thumbnail"

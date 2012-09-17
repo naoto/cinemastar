@@ -6,5 +6,11 @@ module Cinemastar
       OpenStruct.new(YAML.load_file(file))
     end
 
+    def self.save(path, value)
+      file = File.open(path, 'w+')
+      file.write value.to_yaml
+      file.close
+    end
+
   end
 end
