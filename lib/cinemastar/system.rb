@@ -24,6 +24,14 @@ module Cinemastar
       Latest.list link_path
     end
 
+    def search(querys)
+      files = []
+      Video.find_by_name(link_path, querys.gsub(/\s/,'|')) do |file|
+        files << file
+      end
+      {files: files }
+    end
+
     private
     def link_path
       @movie_directory ||= File.expand_path("#{@settings.public_folder}/video")

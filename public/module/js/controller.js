@@ -124,6 +124,7 @@ $(document).ready(function(){
 
     $('#search').submit(function(){
       $.getJSON("/search/" + $('#q').val(), events);
+      return false;
     });
 
 

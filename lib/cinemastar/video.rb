@@ -10,6 +10,14 @@ module Cinemastar
       end
     end
 
+    def self.find_by_name(directory, querys)
+      Dir.glob("#{directory}/**/*.*").each do |file|
+        if file =~ /(#{querys})/
+          yield Video.new(file, directory).to_map
+        end
+      end
+    end
+
     def initialize(file, path)
       @file = file
       @path = path

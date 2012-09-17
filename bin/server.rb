@@ -30,3 +30,7 @@ end
 get '/latest' do
   @@system.latest.to_json
 end
+
+get %r{/search/#?(.*)} do
+  @@system.search(params[:captures].first).to_json
+end
