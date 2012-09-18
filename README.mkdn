@@ -16,7 +16,7 @@ Install
 install ffmpeg for homebrew
 
 ```sh
-$ brew install ffmpeg
+$ brew install FFmpeg
 ```
 
 install bundler
