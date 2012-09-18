@@ -13,6 +13,12 @@ Used
 Install
 -----------------------------------------------------
 
+install ffmpeg for homebrew
+
+```sh
+$ brew install ffmpeg
+```
+
 install bundler
 
 ```sh
@@ -38,5 +44,7 @@ Setting
 Start
 ------------------------------------------------------
 
-> $ bundle exec bin/server.rb
+```sh
+$ bundle exec bin/server.rb
+```
 
