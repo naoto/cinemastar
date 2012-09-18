@@ -28,7 +28,7 @@ $ gem install bundler
 install gem
 
 ```sh
-$ bundle install -path vendor/bundle
+$ bundle install --path vendor/bundle
 ```
 
 Setting
