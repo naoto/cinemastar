@@ -24,7 +24,7 @@ module Cinemastar
     end
 
     def create_thumbnail
-      `ffmpeg -ss #{[*1..300].sample} -vframes 1 -i "#{movie}" -f image2 -s 160x90 #{image}`
+      `ffmpeg -ss #{[*1..300].sample} -vframes 1 -i "#{movie}" -f image2 -s 160x90 "#{image}"`
     end
 
     def movie
