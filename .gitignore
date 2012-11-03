@@ -1,4 +1,5 @@
 vendor/*
 .bundle/*
 config/setting.yaml
-public/*
+public/thumbnail
+public/video
