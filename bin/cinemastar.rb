@@ -33,6 +33,5 @@ get %r{/search/#?(.*)} do
 end
 
 get %r{/category/?(.*)} do
-  puts params[:captures]
   @@system.category_list(params[:captures].first).to_json
 end
