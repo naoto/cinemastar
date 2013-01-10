@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 module Cinemastar
   class FFmpeg
 
@@ -10,8 +12,10 @@ module Cinemastar
 
     def self.length(path)
       info = `ffmpeg -i "#{path}" 2>&1`
-      if info =~ /Duration: (\d{2}):(\d{2}):(\d{2})\.\d{2}/
-        return "#{$1}:#{$2}:#{$3}"
+      info.each_line do |line|
+        if line =~ /Duration: (\d{2}):(\d{2}):(\d{2})\.\d{2}/
+          return "#{$1}:#{$2}:#{$3}"
+        end
       end
     end
 

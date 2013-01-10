@@ -64,7 +64,7 @@ module Cinemastar
     end
     
     def ignore?
-      return true if /(html|jpg)$/ =~ @file
+      return true if /(#{YAML.load_file("config/ignore.yaml").join("|")})$/ =~ @file
     end
 
     def to_map

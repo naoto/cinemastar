@@ -1,9 +1,11 @@
+require 'ostruct'
+
 module Cinemastar
-  class Config
+  class Config < OpenStruct
 
     def self.load(file = 'config/setting.yaml')
       raise Error "No Setting File" if !File.exists?(file)
-      OpenStruct.new(YAML.load_file(file))
+      new(YAML.load_file(file))
     end
 
     def self.save(path, value)
