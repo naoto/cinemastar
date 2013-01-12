@@ -1,35 +1,39 @@
 Cinemastar
 =====================================================
 
-Cinemastar is Home Video Server
+Cinemastar is home video server
 
-Used
+Requirements
 -----------------------------------------------------
 
- * ruby 1.9.3
- * sinatra
- * ffmpeg
+* Ruby 1.9.3
+* Sinatra
+* FFmpeg
 
-Install
+
+Getting Started
 -----------------------------------------------------
 
-install ffmpeg for homebrew
+Install FFmpeg by the Homebrew
 
 ```sh
-$ brew install FFmpeg
+$ brew install ffmpeg
 ```
 
-install bundler
+Install the bundler
 
 ```sh
 $ gem install bundler
 ```
 
-install gem
+Install rubygems
 
 ```sh
+$ git clone https://github.com/naoto/cinemastar.git
+$ cd cinemastar
 $ bundle install --path vendor/bundle
 ```
+
 
 Setting
 -----------------------------------------------------
@@ -41,10 +45,11 @@ Setting
 :movie_directory: /path/to/movie/directory
 ```
 
+
 Start
 ------------------------------------------------------
 
 ```sh
-$ bundle exec bin/server.rb
+$ bundle exec bin/cinemastar
 ```
 
