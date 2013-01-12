@@ -1,5 +1,6 @@
-vendor/*
-.bundle/*
+.bundle
+.ruby-version
+vendor
 config/setting.yaml
 public/thumbnail
 public/video
