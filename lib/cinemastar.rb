@@ -1,12 +1,11 @@
 $: << './cinemastar'
 
 module Cinemastar
-
-  require 'cinemastar/config.rb'
-  require 'cinemastar/system.rb'
-  require 'cinemastar/category.rb'
-  require 'cinemastar/video.rb'
+  require 'cinemastar/config'
+  require 'cinemastar/system'
+  require 'cinemastar/category'
+  require 'cinemastar/video'
   require 'cinemastar/ffmpeg'
   require 'cinemastar/latest'
-
+  require 'cinemastar/version'
 end
