@@ -30,7 +30,7 @@ module Cinemastar
     end
 
     def name
-      @file.sub(/^.+?([^\/]+?)\.[^\.]+$/,'\\1')
+      @file.sub(/^.+?([^\/]+?)\.[^\.]+$/,'\\1').gsub(/_/,' ')
     end
 
     def thumbnail
