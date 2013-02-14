@@ -1,55 +1,29 @@
-Cinemastar
-=====================================================
+# Cinemastar
 
-Cinemastar is home video server
+TODO: Write a gem description
 
-Requirements
------------------------------------------------------
+## Installation
 
-* Ruby 1.9.3
-* Sinatra
-* FFmpeg
+Add this line to your application's Gemfile:
 
+    gem 'cinemastar'
 
-Getting Started
------------------------------------------------------
+And then execute:
 
-Install FFmpeg by the Homebrew
+    $ bundle
 
-```sh
-$ brew install ffmpeg
-```
+Or install it yourself as:
 
-Install the bundler
+    $ gem install cinemastar
 
-```sh
-$ gem install bundler
-```
+## Usage
 
-Install rubygems
+TODO: Write usage instructions here
 
-```sh
-$ git clone https://github.com/naoto/cinemastar.git
-$ cd cinemastar
-$ bundle install --path vendor/bundle
-```
+## Contributing
 
-
-Setting
------------------------------------------------------
-
-### Write config/setting.yaml
-
-```yaml
----
-:movie_directory: /path/to/movie/directory
-```
-
-
-Start
-------------------------------------------------------
-
-```sh
-$ bundle exec bin/cinemastar
-```
-
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
