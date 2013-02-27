@@ -1,0 +1,65 @@
+<h2><%= @content.title %></h2>
+<hr />
+<div>
+    <a href="/video/<%= @content.path %>" class="button">
+        Download
+    </a>
+</div>
+<video class="video" src="/video/<%= u @content.path %>" poster="/thumbnail/<%= u @content.thumbnail %>" preload="metadata" width="640" height="410" controls ></video>
+<div id="myElement" class="flv">Loading the player ...</div>
+<hr />
+<div>
+    <div class="image-collection p4x3">
+    <% @content.group_list do |content| %>
+      <div class="image-container">
+        <a href="/content/<%= u content.path %>">
+          <img src="/thumbnail/<%= u content.thumbnail %>" />
+          <div class="overlay"><%= content.title %></div>
+        </a>
+      </div>
+    <% end %>
+    </div>
+</div>
+<script type="text/javascript">
+var video = function(){
+    $('.video').css('display', 'block');
+}
+var flv = function(){
+    $('.flv').css('display', 'block');
+    jwplayer("myElement").setup({
+      file: "<%= URI.encode("/video/#{@content.path}") %>",
+      image: "<%= URI.encode("/thumbnail/#{@content.thumbnail}") %>"
+    });
+}
+var _ua = (function(){
+return {
+ltIE6:typeof window.addEventListener == "undefined" && typeof document.documentElement.style.maxHeight == "undefined",
+ltIE7:typeof window.addEventListener == "undefined" && typeof document.querySelectorAll == "undefined",
+ltIE8:typeof window.addEventListener == "undefined" && typeof document.getElementsByClassName == "undefined",
+IE:document.uniqueID,
+Firefox:window.sidebar,
+Opera:window.opera,
+Webkit:!document.uniqueID && !window.opera && !window.sidebar && window.localStorage && typeof window.orientation == "undefined",
+Mobile:typeof window.orientation != "undefined"
+}
+})();
+if(_ua.ltIE6){
+    flv();
+}else if(_ua.ltIE7){
+    flv();
+}else if(_ua.ltIE8){
+    video();
+}else if(_ua.Webkit){
+    video();
+}else if(_ua.Firefox){
+    flv();
+}else if(_ua.Opera){
+    flv();
+}else if(_ua.IE && !_ua.ltIE8){
+    video();
+}else if(_ua.Mobile){
+    video();
+}else {
+    flv();
+}
+</script>

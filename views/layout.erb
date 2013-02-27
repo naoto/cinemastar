@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head charset="utf-8">
+        <title>Cinemastar Theater</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link href="/css/modern.css" rel="stylesheet">
+         <link href="/css/modern-responsive.css" rel="stylesheet">
+         <style>
+             .video, .flv {
+                display: none;
+             }
+             a {
+                margin : 0px;
+                padding : 0px;
+             }
+             .tile.image  > a > .tile-content  > img.thumb {
+                 width: 320px;
+                 height: 180px;
+                 min-height: none;
+                 max-width: none;
+                 margin-left: -100px;
+                 margin-top: -10px;
+             }
+             .tile.image {
+                 box-shadow: 0 0px 5px 3px #999999;
+                 -moz-box-shadow: 0 0px 5px 3px #999999;
+                 -webkit-box-shadow: 0 0px 5px 3px #999999;
+             }
+             .page .fill {
+                 border: 0px #FFF solid;
+             }
+             div.overlay {
+                 color: #000;
+             }
+             div.menu {
+                 font-size: 10px;
+             }
+             div.menu > div {
+                 border-color: #AAA;
+                 border-style: solid;
+                 border-width: 0px 0px 1px 0px;
+                 margin: 0px 10px;
+             }
+             div.menu > div > a{
+                 color: #000;
+             }
+             div.brand > div.name {
+                 text-shadow: 3px 3px 2px #000;
+             }
+             div.tile {
+                  background: -moz-linear-gradient(top, #fff, #000);
+                  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#000));
+             }
+             div.tile > a > div > img {
+                 opacity: 0.5;
+             }
+
+             div.tile > a > div > img:hover {
+                 opacity: 1;
+             }
+         </style>
+         <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+         <script language="javascript" src="/javascript/dropdown.js"></script>
+         <script language="javascript" src="/javascript/buttonset.js"></script>
+         <script language="javascript" src="/javascript/accordion.js"></script>
+         <script language="javascript">
+         $(document).ready(function(){
+             $('#search').keyup(function(){
+                 $('.menu > div').css('display', 'block');
+                 var query = $(this).val();
+                 $('.menu > div').filter(function(index){
+                     return $(this).text().indexOf(query) == -1
+                 }).css('display','none');
+             });
+         });
+         </script>
+         <script type="text/javascript" src="/player/jwplayer.js"></script>
+         <script type="text/javascript">jwplayer.key="bjgI1ZZJa5NJh7z6blR3lecPSg40J0mH385zeQ==";</script>
+         <script type="text/javascript" src="/javascript/albumcolors.js"></script>
+    </head>
+    <body>
+        <div class="page">
+            <div class="page-header">
+                <div class="page-header-content bg-color-green">
+                    <h1 class="fg-color-white">Cinemastar</h1>
+                </div>
+                <div class="nav-bar bg-color-green">
+                    <div class="nav-bar-inner">
+                        <span class="element">Menu</span>
+                        <span class="divider"></span>
+                        <ul class="menu">
+                            <li class="driver"><a href="/">Latest</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="page-region">
+                <div class="page-region-content">
+                    <div class="grid">
+                        <div class="row">
+                            <div class="span3">
+                                <div class="input-control text">
+                                    <input type="text" class="with-helper" id="search" />
+                                    <button class="btn-search"></button>
+                                </div>
+                                <div class="menu">
+                                <% @menu.child do |category, name, complete| %>
+                                    <div>
+                                        <a href="/category/<%= u category %>"><i class="icon-star<%= complete %>"></i><%= name %></a>
+                                    </div>
+                                <% end %>
+                                </div>
+                            </div>
+                            <div class="page fill span10">
+                                <%= yield %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

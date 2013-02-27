@@ -7,6 +7,7 @@ module Cinemastar
   require 'cinemastar/options'
   require 'cinemastar/menu'
   require 'cinemastar/content'
+  require 'cinemastar/page'
   
   def self.start(options)
     Server.run!(Options.load(options))

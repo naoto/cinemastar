@@ -1,78 +1,27 @@
-<!DOCTYPE html>
-<html>
-    <head charset="utf-8">
-        <title>Cinemastar Theater</title>
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link href="css/modern.css" rel="stylesheet">
-         <link href="css/modern-responsive.css" rel="stylesheet">
-         <style>
-             .tile.image  > .tile-content  > img.thumb {
-                 width: 320px;
-                 height: 180px;
-                 min-height: none;
-                 max-width: none;
-                 margin-left: -100px;
-             }
-         </style>
-         <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-         <script language="javascript" src="javascript/dropdown.js"></script>
-    </head>
-    <body>
-        <div class="page">
-            <div class="page-header">
-                <div class="page-header-content bg-color-green">
-                    <h1 class="fg-color-white">Cinemastar</h1>
-                </div>
+<% @latest.each do |content| %>
+    <div class="content tile image outline-color-red">
+        <a href="/content/<%= content.path %>">
+            <div class="tile-content">
+                <img class="thumb" src="/thumbnail/<%= content.thumbnail %>" />
             </div>
-            <div class="page-region">
-                <div class="page-region-content">
-                    <div class="grid">
-                        <div class="row">
-                            <div class="span3">
-                                <div class="page snapped">
-                                    <div class="page with-sidebar">
-                                        <div class="page-sidebar">
-                                            <% @menu.child(false) do |category, start, finish, cstart, cfinish, ul, li, complete| %>
-                                                <%= "<li #{li}>" if cstart %>
-                                                <%= "<ul #{ul}>" if start %>
-                                                <%= "<a><i class=\"icon-star#{complete}\"></i>#{category}</a>" unless category.nil? %>
-                                                <%= "</ul>" if finish %>
-                                                <%= "</li>" if cfinish %>
-                                            <% end %>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="page fill span10">
-                                <% @latest.each do |content| %>
-                                    <div class="tile image outline-color-red">
-                                        <div class="tile-content">
-                                            <img class="thumb" src="/thumbnail/<%= content.thumbnail %>" />
-                                        </div>
-                                        <div class="brand">
-                                            <div class="name"><%= content.title %></div>
-                                        </div>
-                                    </div>
-                                <% end %>
-                                <% if !@latest.nil? %>
-                                <div class="span8">
-                                    <div class="pagination">
-                                        <ul>
-                                            <li class="first"><a></a></li>
-                                            <li class="prev"><a></a></li>
-                                            <li><a>1</a></li>
-                                            <li class="next"><a></a></li>
-                                            <li class="last"><a></a></li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                                <% end %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="brand">
+                <div class="name"><%= content.title %></div>
             </div>
+        </a>
+    </div>
+<% end %>
+<% if !@latest.nil? %>
+    <div class="span8">
+        <div class="pagination">
+            <ul>
+                <li class="first"><a href="/1"></a></li>
+                <li class="prev"><a href="/<%= @page.prev %>"></a></li>
+                <% @page.paginate do |page| %>
+                    <li class="<%= "active" if @page.eq page %>"><a href="/<%= page+1 %>"><%= page+1 %></a></li>
+                <% end %>
+                <li class="next"><a href="/<%= @page.next %>"></a></li>
+                <li class="last"><a href="/<%= @page.last %>"></a></li>
+            </ul>
         </div>
-    </body>
-</html>
+    </div>
+<% end %>

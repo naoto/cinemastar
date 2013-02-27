@@ -43,6 +43,19 @@ module Cinemastar
       filename
     end
 
+    def path
+      @path.gsub(@root, '').gsub(/^\//,'')
+    end
+
+    def group_list
+      directory = @path.gsub(/[^\/]+$/, '')
+      Dir.entries(directory).sort.each do |content|
+        path = "#{directory}#{content}"
+        next if [".",".."].include?(content) || File.directory?(path)
+        yield Content.new(path, @root)
+      end
+    end
+
     private
      def create_thumbnail(path, filename)
        `ffmpeg -ss #{[*1..300].sample} -vframes 1 -i "#{path}" -f image2 -s 320x180 "#{BASE_PATH}#{filename}"`

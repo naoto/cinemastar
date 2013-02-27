@@ -24,22 +24,11 @@ module Cinemastar
       end
     end
 
-    def child(level, &blk)
-      count = 0
+    def child(owner = "", &blk)
       each do |key, val|
-        start = start?(count)
-        last = last?(count)
-        ul, li = [nil, "data-role=\"dropdown\""]
-        if level
-          ul, li = ["class=\"sub-menu light sidebar-dropdown-menu\"","data-role=\"dropdown\""]
-        end
-        blk.call(nil, true, false, false, false, ul, li, nil) if start
-        blk.call(nil, false, false, true, false, ul, li, nil)
-        blk.call(key.gsub(/^\d+_/,'').gsub('_',' '), false, false, false, false, ul, li, complete(key))
-        val.child(true, &blk)
-        blk.call(nil, false, false, false, true, ul, li, nil)
-        blk.call(nil, false, true, false, false, ul, li, nil) if last
-        count = count + 1
+        directory = "#{owner}/#{key}"
+        blk.call(directory.gsub(/^\//,''), key.gsub(/^\d+_/,'').gsub('_',' '), complete(key))
+        val.child(directory, &blk)
       end
     end
 
