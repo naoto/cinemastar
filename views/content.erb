@@ -1,4 +1,6 @@
+<div class="subtitle">
 <h2><%= @content.title %></h2>
+</div>
 <hr />
 <div>
     <a href="/video/<%= @content.path %>" class="button">
@@ -11,10 +13,14 @@
 <div>
     <div class="image-collection p4x3">
     <% @content.group_list do |content| %>
-      <div class="image-container">
+      <div class="content tile image outline-color-red">
         <a href="/content/<%= u content.path %>">
-          <img src="/thumbnail/<%= u content.thumbnail %>" />
-          <div class="overlay"><%= content.title %></div>
+          <div class="tile-content">
+            <img class="thumb" src="/thumbnail/<%= u content.thumbnail %>" />
+          </div>
+          <div class="brand">
+            <div class="name"><%= content.title %></div>
+          </div>
         </a>
       </div>
     <% end %>

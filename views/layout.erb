@@ -35,17 +35,17 @@
              div.menu {
                  font-size: 10px;
              }
-             div.menu > div {
-                 border-color: #AAA;
+             div.menu > a > div {
+                 border-color: #FFF;
                  border-style: solid;
                  border-width: 0px 0px 1px 0px;
-                 margin: 0px 10px;
-             }
-             div.menu > div > a{
-                 color: #000;
+                 margin: 1px 5px;
+                 padding: 2px;
+                 text-shadow: 1px 1px 2px #000;
+                 color: #FFF;
              }
              div.brand > div.name {
-                 text-shadow: 3px 3px 2px #000;
+                 text-shadow: 1px 1px 2px #000;
              }
              div.tile {
                   background: -moz-linear-gradient(top, #fff, #000);
@@ -58,6 +58,9 @@
              div.tile > a > div > img:hover {
                  opacity: 1;
              }
+             div.menusearch{
+                 padding-left: 5px;
+             }
          </style>
          <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
          <script language="javascript" src="/javascript/dropdown.js"></script>
@@ -66,9 +69,9 @@
          <script language="javascript">
          $(document).ready(function(){
              $('#search').keyup(function(){
-                 $('.menu > div').css('display', 'block');
+                 $('.menu > a > div').css('display', 'block');
                  var query = $(this).val();
-                 $('.menu > div').filter(function(index){
+                 $('.menu > a > div').filter(function(index){
                      return $(this).text().indexOf(query) == -1
                  }).css('display','none');
              });
@@ -81,10 +84,10 @@
     <body>
         <div class="page">
             <div class="page-header">
-                <div class="page-header-content bg-color-green">
+                <div class="page-header-content bg-color-orangeDark">
                     <h1 class="fg-color-white">Cinemastar</h1>
                 </div>
-                <div class="nav-bar bg-color-green">
+                <div class="nav-bar bg-color-orangeDark">
                     <div class="nav-bar-inner">
                         <span class="element">Menu</span>
                         <span class="divider"></span>
@@ -99,15 +102,17 @@
                     <div class="grid">
                         <div class="row">
                             <div class="span3">
-                                <div class="input-control text">
+                                <div class="input-control text menusearch">
                                     <input type="text" class="with-helper" id="search" />
                                     <button class="btn-search"></button>
                                 </div>
                                 <div class="menu">
                                 <% @menu.child do |category, name, complete| %>
-                                    <div>
-                                        <a href="/category/<%= u category %>"><i class="icon-star<%= complete %>"></i><%= name %></a>
-                                    </div>
+                                    <a href="/category/<%= u category %>">
+                                        <div class="bg-color-<%= complete ? "greenLight" : "yellow" %>">
+                                            <%= name %>
+                                        </div>
+                                    </a>
                                 <% end %>
                                 </div>
                             </div>
