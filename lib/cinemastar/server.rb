@@ -20,7 +20,7 @@ module Cinemastar
     end
 
     get %r{/content/(.+)$} do
-      @content = Content.new "#{settings.directory}/#{params[:captures].first}", settings.directory
+      @content = Content.new "#{settings.directory}#{params[:captures].first}", settings.directory
       @menu = Menu.load settings.directory
       erb :content
     end

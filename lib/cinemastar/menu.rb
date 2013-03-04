@@ -33,7 +33,7 @@ module Cinemastar
     end
 
     def complete(key)
-      @@complete.include?(key) ? '' : '-3'
+      @@complete.include?(key) ? true : false
     end
 
     def start?(index)
