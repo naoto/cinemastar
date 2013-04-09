@@ -1,3 +1,13 @@
+<ul class="accordion" data-role="accordion">
+  <li>
+    <a href="#"><%= @category %></a>
+    <div>
+    <% @summary.each do |s| %>
+      <p class="long-text"><%= s %></p>
+    <% end %>
+    </div>
+  </li>
+</ul>
 <% @content.group_list do |content| %>
     <div class="tile image outline-color-red">
       <a href="/content/<%= u content.path %>">

@@ -17,7 +17,7 @@ module Cinemastar
 
     def self.ignore?(filename)
       case filename
-      when /(yaml|yml|jpg|png|gif|html|js|css)$/
+      when /(yaml|yml|jpg|png|gif|html|js|css|sh)$/
         true
       else
         false
@@ -51,7 +51,7 @@ module Cinemastar
       directory = @path.gsub(/[^\/]+$/, '')
       Dir.entries(directory).sort.each do |content|
         path = "#{directory}#{content}"
-        next if [".",".."].include?(content) || File.directory?(path)
+        next if [".",".."].include?(content) || File.directory?(path) || Content.ignore?(path)
         yield Content.new(path, @root)
       end
     end

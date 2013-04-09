@@ -24,11 +24,11 @@ module Cinemastar
       end
     end
 
-    def child(owner = "", &blk)
+    def child(owner = "", level = 0, &blk)
       each do |key, val|
         directory = "#{owner}/#{key}"
-        blk.call(directory.gsub(/^\//,''), key.gsub(/^\d+_/,'').gsub('_',' '), complete(key))
-        val.child(directory, &blk)
+        blk.call(directory.gsub(/^\//,''), key.gsub(/^\d+_/,'').gsub('_',' '), complete(key), level)
+        val.child(directory, level.succ, &blk)
       end
     end
 

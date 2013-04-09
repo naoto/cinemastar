@@ -61,6 +61,20 @@
              div.menusearch{
                  padding-left: 5px;
              }
+             div.maincontent{
+                 background: -moz-linear-gradient(right, rgba(255,255,255,0.8), rgba(255,255,255,0.9), rgba(255,255,255,1)), url("/video/<%= @path || "" %>/background.jpg") no-repeat right top fixed;
+                 background: url(/video/<%= @path || "" %>/background.jpg) no-repeat right top fixed;
+
+             }
+             div.maskcontent {
+                 background: -webkit-gradient(linear, left top, right top, from(#FFFFFF), to(rgba(255,255,255,0.2)));
+             }
+             div.category {
+                 display: none;
+             }
+             div.disp0 {
+                 display: block;
+             }
          </style>
          <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
          <script language="javascript" src="/javascript/dropdown.js"></script>
@@ -97,8 +111,8 @@
                     </div>
                 </div>
             </div>
-            <div class="page-region">
-                <div class="page-region-content">
+            <div class="page-region maincontent">
+                <div class="page-region-content maskcontent">
                     <div class="grid">
                         <div class="row">
                             <div class="span3">
@@ -107,9 +121,9 @@
                                     <button class="btn-search"></button>
                                 </div>
                                 <div class="menu">
-                                <% @menu.child do |category, name, complete| %>
+                                <% @menu.child do |category, name, complete, level| %>
                                     <a href="/category/<%= u category %>">
-                                        <div class="bg-color-<%= complete ? "greenLight" : "yellow" %>">
+                                        <div class="bg-color-<%= level == 0 ? "blueDark" : complete ? "greenLight" : "yellow" %>">
                                             <%= name %>
                                         </div>
                                     </a>
