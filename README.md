@@ -1,6 +1,11 @@
 # Cinemastar
 
-TODO: Write a gem description
+Cinemastar - Local Video Site
+
+[![Build Status](https://travis-ci.org/naoto/cinemastar.png?branch=master)](https://travis-ci.org/naoto/cinemastar)
+[![Code CLimate](https://codeclimate.com/github/naoto/cinemastar.png)](https://codeclimate.com/github/naoto/cinemastar)
+[![Coverage Status](https://coveralls.io/repos/naoto/cinemastar/badge.png?branch=master)](https://coveralls.io/r/naoto/cinemastar)
+
 
 ## Installation
 
