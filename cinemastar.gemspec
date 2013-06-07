@@ -19,5 +19,13 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'foreman'
   gem.add_runtime_dependency 'sinatra'
+  gem.add_runtime_dependency 'nokogiri'
+  gem.add_runtime_dependency 'json', '~> 1.7.7'
+
+  gem.add_development_dependency 'bundler', '~> 1.3'
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'rack-test'
+  gem.add_development_dependency 'coveralls'
 
 end

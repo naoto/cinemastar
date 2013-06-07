@@ -5,7 +5,7 @@ module Cinemastar
 
     def self.load(path)
       raise Cinemastar::DirectoryNotFoundException unless Dir.exists? path
-      @@complete = YAML.load_file("#{File.dirname(__FILE__)}/../../config/complete.yaml")
+      @@complete = YAML.load_file("#{File.dirname(__FILE__)}/../../config/complete.yaml") || []
       new(path)
     end
 
