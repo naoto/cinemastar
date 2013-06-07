@@ -25,30 +25,31 @@ module Cinemastar
       @archive[@category.to_sym] ||= []
     end
 
-    def save
-      o = open('config/summary.yaml','w+')
-      o.puts @archive.to_yaml
-      o.close
-    end
+    private
+     def save
+       o = open('config/summary.yaml','w+')
+       o.puts @archive.to_yaml
+       o.close
+     end
 
-    def wikipedia(category)
-      url = URI.escape("http://ja.wikipedia.org/wiki/#{category}")
-      subtitle = ""
-      content = {}
-      Nokogiri::HTML(open(url)).search("#mw-content-text *").each do |tag|
-        case tag.name
-        when /^h\d$/
-          subtitle = tag.content.gsub("[編集]",'').strip
-        when /^p$/
-          next if tag.content =~ /注意：/
-          content[subtitle] ||= []
-          content[subtitle] << tag.content.gsub(/\[(注釈|)\d+\]/, '')
-        end
-      end
-      content
-    rescue
-      return {}
-    end
+     def wikipedia(category)
+       url = URI.escape("http://ja.wikipedia.org/wiki/#{category}")
+       subtitle = ""
+       content = {}
+       Nokogiri::HTML(open(url)).search("#mw-content-text *").each do |tag|
+         case tag.name
+         when /^h\d$/
+           subtitle = tag.content.gsub("[編集]",'').strip
+         when /^p$/
+           next if tag.content =~ /注意：/
+           content[subtitle] ||= []
+           content[subtitle] << tag.content.gsub(/\[(注釈|)\d+\]/, '')
+         end
+       end
+       content
+     rescue
+       return {}
+     end
 
   end
 end
