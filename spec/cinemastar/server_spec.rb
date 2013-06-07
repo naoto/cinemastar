@@ -3,6 +3,8 @@ require 'spec_helper'
 require './lib/cinemastar/server'
 require 'rack/test'
 
+set :environment, :test
+
 #@TODO 
 describe Cinemastar::Server do
 
@@ -24,16 +26,4 @@ describe Cinemastar::Server do
     end
   end
 
-
-  describe 'access to /:page' do
-    it 'success' do
-      get '/1'
-      #expect(last_response).to be_ok
-    end
-  end
-
-  describe 'access to /content/name' do
-    it 'success' do
-    end
-  end
 end
