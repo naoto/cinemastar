@@ -2,5 +2,5 @@
 .ruby-version
 vendor
 config/setting.yaml
-public/thumbnail
+public/thumbnail/*.jpg
 public/video
