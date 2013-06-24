@@ -27,8 +27,9 @@ module Cinemastar
     end
 
     def child(owner = nil, &blk)
-      if !owner.nil?
+      if !owner.nil? && @child_category.instance_of?(Hash)
         @selector_path << owner
+        puts "#{owner} =======> #{@child_category[owner]}"
         @child_category = @child_category[owner] || @child_category
       end
       @child_category.each do |key, val|
