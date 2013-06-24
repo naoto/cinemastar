@@ -27,17 +27,18 @@ module Cinemastar
     end
 
     def child(owner = nil, &blk)
-      if !owner.nil? && @child_category.instance_of?(Hash)
-        @selector_path << owner
-        puts "#{owner} =======> #{@child_category[owner]}"
-        @child_category = @child_category[owner] || @child_category
-      end
-      @child_category.each do |key, val|
-        directory = "#{@selector_path.join("/")}/#{key}"
-        path = directory.gsub(/^\//,'')
-        name = key.gsub(/^\d+_/,'').gsub('_',' ')
-        comp = complete(key)
-        blk.call name, path, comp
+      if File.directory?("#{@root}#{@selector_path.join("/")}/#{owner}")
+        if !owner.nil?
+          @selector_path << owner
+          @child_category = @child_category[owner] || @child_category
+        end
+        @child_category.each do |key, val|
+          directory = "#{@selector_path.join("/")}/#{key}"
+          path = directory.gsub(/^\//,'')
+          name = key.gsub(/^\d+_/,'').gsub('_',' ')
+          comp = complete(key)
+          blk.call name, path, comp
+        end
       end
     end
 
