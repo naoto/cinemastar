@@ -13,6 +13,7 @@ module Cinemastar
     end
 
     get '/:page' do
+      @category = []
       @page = Page.new params[:page]
       @menu = Menu.load settings.directory
       @latest = Content.latest settings.directory, @page.range
@@ -20,6 +21,7 @@ module Cinemastar
     end
 
     get %r{/content/(.+)$} do
+      @category = params[:captures].first.split("/")
       @content = Content.new "#{settings.directory}#{params[:captures].first}", settings.directory
       @menu = Menu.load settings.directory
       erb :content
@@ -27,8 +29,8 @@ module Cinemastar
 
     get %r{/category/(.+)$} do
       @path = params[:captures].first
-      @category = params[:captures].first.split("/").last
-      @summary = Summary.select @category
+      @category = params[:captures].first.split("/")
+      @summary = Summary.select @category.last
       @content = Content.new "#{settings.directory}/#{params[:captures].first}/", settings.directory
       @menu = Menu.load settings.directory
       erb :category

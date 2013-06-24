@@ -3,7 +3,7 @@ module Cinemastar
 
     def initialize(page, option = {})
       @page = page.to_i
-      @length = option[:length] || 30
+      @length = option[:length] || 32
     end
 
     def range
