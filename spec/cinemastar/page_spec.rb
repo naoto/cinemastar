@@ -18,7 +18,7 @@ describe Cinemastar::Page do
 
   describe 'range' do
     it 'works' do
-      expect(subject.range()).to eq 0...30
+      expect(subject.range()).to eq 0...32
     end
   end
 

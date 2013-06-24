@@ -1,6 +1,6 @@
 <ul class="accordion" data-role="accordion">
   <li>
-    <a href="#"><%= @category %></a>
+    <a href="#"><%= @category.last %></a>
     <div>
     <% @summary.each do |s| %>
       <p class="long-text"><%= s %></p>

@@ -15,6 +15,8 @@ module Cinemastar
         $1 == "/" ? $1 : "#{$1}/"
       }
       build
+      @child_category = self
+      @selector_path = []
     end
 
     def build
@@ -24,12 +26,22 @@ module Cinemastar
       end
     end
 
-    def child(owner = "", level = 0, &blk)
-      each do |key, val|
-        directory = "#{owner}/#{key}"
-        blk.call(directory.gsub(/^\//,''), key.gsub(/^\d+_/,'').gsub('_',' '), complete(key), level)
-        val.child(directory, level.succ, &blk)
+    def child(owner = nil, &blk)
+      if !owner.nil?
+        @selector_path << owner
+        @child_category = @child_category[owner] || @child_category
       end
+      @child_category.each do |key, val|
+        directory = "#{@selector_path.join("/")}/#{key}"
+        path = directory.gsub(/^\//,'')
+        name = key.gsub(/^\d+_/,'').gsub('_',' ')
+        comp = complete(key)
+        blk.call name, path, comp
+      end
+    end
+
+    def child?(category)
+      !@child_category[category].nil? && @child_category[category] != {}
     end
 
     def complete(key)

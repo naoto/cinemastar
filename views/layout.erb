@@ -24,11 +24,6 @@
                  margin-left: -100px;
                  margin-top: -10px;
              }
-             .tile.image {
-                 box-shadow: 0 0px 5px 3px #999999;
-                 -moz-box-shadow: 0 0px 5px 3px #999999;
-                 -webkit-box-shadow: 0 0px 5px 3px #999999;
-             }
              .page .fill {
                  border: 0px #FFF solid;
              }
@@ -61,16 +56,10 @@
              div.tile > a > div > img:hover {
                  opacity: 1;
              }
-             div.menusearch{
-                 padding-left: 5px;
-             }
              div.maincontent{
                  background: -moz-linear-gradient(right, rgba(255,255,255,0.8), rgba(255,255,255,0.9), rgba(255,255,255,1)), url("/video/<%= @path || "" %>/background.jpg") no-repeat right top fixed;
                  background: url(/video/<%= @path || "" %>/background.jpg) no-repeat right top fixed;
 
-             }
-             div.maskcontent {
-                 background: -webkit-gradient(linear, left top, right top, from(#FFFFFF), to(rgba(255,255,255,0.2)));
              }
              div.category {
                  display: none;
@@ -87,25 +76,25 @@
                font-size: 2em;
                line-height: 25px;
              }
+             .page-content {
+               margin-left: 10px;
+             }
+             div.content-list {
+               margin-top: 50px
+             }
          </style>
          <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
          <script language="javascript" src="/javascript/dropdown.js"></script>
          <script language="javascript" src="/javascript/buttonset.js"></script>
          <script language="javascript" src="/javascript/accordion.js"></script>
-         <script language="javascript">
-         $(document).ready(function(){
-             $('#search').keyup(function(){
-                 $('.menu > a > div').css('display', 'block');
-                 var query = $(this).val();
-                 $('.menu > a > div').filter(function(index){
-                     return $(this).text().indexOf(query) == -1
-                 }).css('display','none');
-             });
-         });
-         </script>
+         <script type="text/javascript" src="/javascript/jquery.autopager-1.0.0.js"></script>
          <script type="text/javascript" src="/player/jwplayer.js"></script>
          <script type="text/javascript">jwplayer.key="bjgI1ZZJa5NJh7z6blR3lecPSg40J0mH385zeQ==";</script>
-         <script type="text/javascript" src="/javascript/albumcolors.js"></script>
+         <script language="javascript">
+         $(document).ready(function(){
+           $.autopager({content: '#main-content-field', insertBefore: '#insert', autoLoad: true});
+         });
+         </script>
     </head>
     <body>
         <div class="page">
@@ -119,6 +108,25 @@
                         <span class="divider"></span>
                         <ul class="menu">
                             <li class="driver"><a href="/">Latest</a></li>
+                            <li data-role="dropdown">
+                                <a href="#">Category</a>
+                                <ul class="dropdown-menu">
+                                    <% @menu.child do |name, path, complete| %>
+                                        <li><a href="/category/<%= path %>"><%= name %></a></li>
+                                    <% end %>
+                                </ul>
+                            </li>
+                            <% @category.each do |cate| %>
+                                <% break unless @menu.child? cate %>
+                                <li data-role="dropdown">
+                                    <a href="#"><%= cate %></a>
+                                    <ul class="dropdown-menu">
+                                        <% @menu.child cate do |name, path, complete| %>
+                                            <li><a href="/category/<%= path %>"><%= name %></a></li>
+                                        <% end %>
+                                    </ul>
+                                </li>
+                            <% end %>
                         </ul>
                     </div>
                 </div>
@@ -127,24 +135,26 @@
                 <div class="page-region-content maskcontent">
                     <div class="grid">
                         <div class="row">
-                            <div class="span3">
-                                <div class="input-control text menusearch">
-                                    <input type="text" class="with-helper" id="search" />
-                                    <button class="btn-search"></button>
-                                </div>
-                                <div class="menu">
-                                <% @menu.child do |category, name, complete, level| %>
-                                    <a href="/category/<%= u category %>">
-                                        <div class="bg-color-<%= level == 0 ? "blueDark" : complete ? "greenLight" : "yellow" %>">
-                                            <%= name %>
-                                        </div>
-                                    </a>
-                                <% end %>
+                            <div class="page-content">
+                                <div id="main-content-field">
+                                    <%= yield %>
                                 </div>
                             </div>
-                            <div class="page fill span10">
-                                <%= yield %>
-                            </div>
+                            <% if !@latest.nil? %>
+                                <div class="span8">
+                                    <div class="pagination">
+                                        <ul>
+                                            <li class="first"><a href="/1"></a></li>
+                                            <li class="prev"><a href="/<%= @page.prev %>"></a></li>
+                                            <% @page.paginate do |page| %>
+                                                <li class="<%= "active" if @page.eq page %>"><a href="/<%= page+1 %>"><%= page+1 %></a></li>
+                                            <% end %>
+                                            <li class="next"><a href="/<%= @page.next %>" rel="next"></a></li>
+                                            <li class="last"><a href="/<%= @page.last %>"></a></li>
+                                        </ul>
+                                    </div>
+                                <div>
+                            <% end %>
                         </div>
                     </div>
                 </div>
