@@ -1,5 +1,5 @@
 <% @latest.each do |content| %>
-    <div class="content tile image outline-color-red">
+    <div class="content tile image">
         <a href="/content/<%= content.path %>">
             <div class="tile-content">
                 <img class="thumb" src="/thumbnail/<%= content.thumbnail %>" />
@@ -10,18 +10,4 @@
         </a>
     </div>
 <% end %>
-<% if !@latest.nil? %>
-    <div class="span8">
-        <div class="pagination">
-            <ul>
-                <li class="first"><a href="/1"></a></li>
-                <li class="prev"><a href="/<%= @page.prev %>"></a></li>
-                <% @page.paginate do |page| %>
-                    <li class="<%= "active" if @page.eq page %>"><a href="/<%= page+1 %>"><%= page+1 %></a></li>
-                <% end %>
-                <li class="next"><a href="/<%= @page.next %>"></a></li>
-                <li class="last"><a href="/<%= @page.last %>"></a></li>
-            </ul>
-        </div>
-      <div>
-<% end %>
+<span id="insert"></span>

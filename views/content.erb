@@ -7,10 +7,13 @@
         Download
     </a>
 </div>
-<video class="video" src="/video/<%= u @content.path %>" poster="/thumbnail/<%= u @content.thumbnail %>" preload="metadata" width="640" height="410" controls ></video>
-<div id="myElement" class="flv">Loading the player ...</div>
-<hr />
-<div>
+<div class="row">
+  <div class="offset4">
+    <video class="video" src="/video/<%= u @content.path %>" poster="/thumbnail/<%= u @content.thumbnail %>" preload="metadata" width="640" height="410" controls ></video>
+    <div id="myElement" class="flv">Loading the player ...</div>
+  </div>
+</div>
+<div class="row content-list">
     <div class="image-collection p4x3">
     <% @content.group_list do |content| %>
       <div class="content tile image outline-color-red">

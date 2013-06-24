@@ -32,16 +32,12 @@ describe Cinemastar::Menu do
 
   describe 'child' do
     it 'generate menu tree' do
-      owner = ""
-      level = 0
       got_dir = ["menu1", "menu2", "menu3", "menu3/submenu1","menu3/submenu2"]
       got_key = ["menu1", "menu2", "menu3", "submenu1", "submenu2"]
-      got_lv = [0,0,0,1,1]
-      subject.child(owner, level) do |dir, key, comp, lv|
-        expect(dir).to eq got_dir.shift
-        expect(key).to eq got_key.shift
+      subject.child do |name, path, comp|
+        expect(name).to eq got_dir.shift
+        expect(path).to eq got_key.shift
         expect(comp).to be_false
-        expect(lv).to eq got_lv.shift
       end
     end
   end
