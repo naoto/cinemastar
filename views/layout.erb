@@ -133,6 +133,14 @@
             </div>
             <div class="page-region maincontent">
                 <div class="page-region-content maskcontent">
+                  <div class="row">
+                        <form action="/search/" method="get">
+                            <div class="input-control text span4">
+                                <input type="text" class="with-helper" name="query" value="<%= @query %>"/>
+                                <button class="btn-search"></button>
+                            </div>
+                        </form>
+                    </div>
                     <div class="grid">
                         <div class="row">
                             <div class="page-content">
@@ -140,17 +148,23 @@
                                     <%= yield %>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="row">
                             <% if !@latest.nil? %>
                                 <div class="span8">
                                     <div class="pagination">
                                         <ul>
-                                            <li class="first"><a href="/1"></a></li>
-                                            <li class="prev"><a href="/<%= @page.prev %>"></a></li>
+                                          <li class="first"><a href="1?query=<%= @query %>"></a></li>
+                                          <li class="prev"><a href="<%= @page.prev %>?query=<%= @query %>"></a></li>
                                             <% @page.paginate do |page| %>
-                                                <li class="<%= "active" if @page.eq page %>"><a href="/<%= page+1 %>"><%= page+1 %></a></li>
+                                              <li class="<%= "active" if @page.eq page %>">
+                                                <a href="<%= page+1 %>?query=<%= @query %>"><%= page+1 %></a>
+                                              </li>
                                             <% end %>
-                                            <li class="next"><a href="/<%= @page.next %>" rel="next"></a></li>
-                                            <li class="last"><a href="/<%= @page.last %>"></a></li>
+                                            <li class="next"><a href="<%= @page.next %>?query=<%= @query %>" rel="next"></a></li>
+                                            <li class="last"><a href="<%= @page.last %>?query=<%= @query %>"></a></li>
                                         </ul>
                                     </div>
                                 <div>
