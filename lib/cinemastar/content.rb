@@ -3,6 +3,17 @@ module Cinemastar
       
     BASE_PATH = "#{File.dirname(__FILE__)}/../../public/thumbnail/"
 
+    def self.search(path, query, range)
+      files = []
+      q = query.gsub(/\s/, "|")
+      Dir.glob("#{path}**/*.*").delete_if { |d|
+        File.directory?(d) || ignore?(d) || d !~ /(#{q})/
+      }.sort[range].each do |file|
+        files << Content.new(file, path)
+      end
+      files
+    end
+
     def self.latest(path,range)
       files = []
       Dir.glob("#{path}**/*.*").delete_if{ |d|
