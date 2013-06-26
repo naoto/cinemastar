@@ -12,6 +12,24 @@ module Cinemastar
       redirect '/1'
     end
 
+    get '/search/' do
+      @category = []
+      @page = Page.new 1
+      @query = params[:query]
+      @menu = Menu.load settings.directory
+      @latest = Content.search settings.directory, @query, @page.range
+      erb :index
+    end
+
+    get '/search/:page' do
+      @category = []
+      @page = Page.new params[:page]
+      @query = params[:query]
+      @menu = Menu.load settings.directory
+      @latest = Content.search settings.directory, @query, @page.range
+      erb :index
+    end
+
     get '/:page' do
       @category = []
       @page = Page.new params[:page]
