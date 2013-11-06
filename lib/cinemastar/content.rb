@@ -69,7 +69,7 @@ module Cinemastar
 
     private
      def create_thumbnail(path, filename)
-       `ffmpeg -ss #{[*1..300].sample} -vframes 1 -i "#{path}" -f image2 -s 320x180 "#{BASE_PATH}#{filename}"`
+       `ffmpeg -ss #{[*1..300].sample} -i "#{path}" -vframes 1 -f image2 -s 320x180 "#{BASE_PATH}#{filename}"`
      end
 
   end
